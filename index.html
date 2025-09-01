@@ -85,15 +85,18 @@
       data.forEach(row => {
         if (!row['NAMA LENGKAP']) return; // Lewati baris kosong
 
+        const genderClass = row['JENIS KELAMIN'] && row['JENIS KELAMIN'].toLowerCase().includes('laki') 
+                            ? 'gender-male' : 'gender-female';
+
         const card = document.createElement("div");
         card.classList.add("card");
 
         card.innerHTML = `
           <h2>${row['NAMA LENGKAP']}</h2>
-          <p>Jenis Kelamin: <span class="${row['JENIS KELAMIN'].toLowerCase() === 'laki-laki' ? 'gender-male' : 'gender-female'}">${row['JENIS KELAMIN']}</span></p>
-          <p>Tempat Lahir: ${row['TEMPAT LAHIR']}</p>
-          <p>Tanggal Lahir: ${row['TANGGAL LAHIR']}</p>
-          <p>Alamat: ${row['ALAMAT']}</p>
+          <p>Jenis Kelamin: <span class="${genderClass}">${row['JENIS KELAMIN'] || '-'}</span></p>
+          <p>Tempat Lahir: ${row['TEMPAT LAHIR'] || '-'}</p>
+          <p>Pekerjaan: ${row['PEKERJAAN'] || '-'}</p>
+          <p>Alamat: ${row['ALAMAT'] || '-'}</p>
         `;
 
         grid.appendChild(card);
